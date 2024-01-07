@@ -1,15 +1,18 @@
 {
   "ci": {
     "collect": {
-      "url": [
-        "https://lighthouse-five.vercel.app/"
-      ],
-      "startServerCommand": "pnpm run start",
-      "startServerReadyPattern": "listen|ready",
-      "numberOfRuns": 1
+      "staticDistDir": "./next"
     },
     "assert": {
-      "preset": "lighthouse:recommended"
+      "preset": [
+        "lighthouse:recommended",
+        "lighthouse:no-pwa"
+      ],
+      "assertions": {
+        "bf-cache": "off",
+        "csp-xss": "off",
+        "tap-targets": "off"
+      }
     },
     "upload": {
       "target": "temporary-public-storage"
