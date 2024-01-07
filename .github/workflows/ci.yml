@@ -23,6 +23,6 @@ jobs:
 
       # Build and run Lighthouse CI
       - run: pnpm run build
-      - run: lhci autorun
+      - run: lhci autorun --chrome-flags="--no-sandbox --headless" --collect.staticDistDir=dist
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
