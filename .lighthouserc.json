@@ -2,7 +2,7 @@
   "ci": {
     "collect": {
       "url": [
-        "http://localhost:3000"
+        "https://lighthouse-five.vercel.app/"
       ],
       "startServerCommand": "pnpm run start",
       "startServerReadyPattern": "listen|ready",
