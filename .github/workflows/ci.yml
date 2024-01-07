@@ -5,9 +5,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      # Update this step to use a newer Node.js version
       - uses: actions/setup-node@v1
+        with:
+          node-version: '16.14' # Specify Node.js version 16.14 or higher
+          cache: 'pnpm'         # Enable caching for pnpm
+
+      # Install pnpm
       - run: npm install -g pnpm
-      - run: pnpm install && npm install -g @lhci/cli@0.6.x
+
+      # Install project dependencies with pnpm
+      - run: pnpm install
+
+      # Install Lighthouse CI with npm
+      - run: npm install -g @lhci/cli@0.6.x
+
+      # Build and run Lighthouse CI
       - run: pnpm run build
       - run: lhci autorun
         env:
