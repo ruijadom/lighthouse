@@ -6,10 +6,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # Update this step to use a newer Node.js version
+      # Update Node.js to version 18.17.0 or higher
       - uses: actions/setup-node@v1
         with:
-          node-version: '16.14' # Specify Node.js version 16.14 or higher
+          node-version: '18.17' # Specify Node.js version 18.17.0 or higher
           cache: 'pnpm'         # Enable caching for pnpm
 
       # Install pnpm
