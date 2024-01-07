@@ -11,9 +11,6 @@ jobs:
           node-version: '18.17'
           cache: 'pnpm'
 
-      - name: Install Chromium
-        run: sudo apt-get install -y chromium-browser
-
       - run: npm install -g pnpm
 
       - run: pnpm install
@@ -24,6 +21,6 @@ jobs:
 
       # Run Lighthouse using Chromium in headless mode
       - name: Run Lighthouse CI
-        run: lhci autorun --chrome-flags="--headless --no-sandbox"
+        run: lhci autorun --collect.url=https://lighthouse-five.vercel.app/"
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
