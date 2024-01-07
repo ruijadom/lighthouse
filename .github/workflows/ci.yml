@@ -6,23 +6,24 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # Update Node.js to version 18.17.0 or higher
       - uses: actions/setup-node@v1
         with:
-          node-version: '18.17' # Specify Node.js version 18.17.0 or higher
-          cache: 'pnpm'         # Enable caching for pnpm
+          node-version: '18.17'
+          cache: 'pnpm'
 
-      # Install pnpm
+      - name: Install Chromium
+        run: sudo apt-get install -y chromium-browser
+
       - run: npm install -g pnpm
 
-      # Install project dependencies with pnpm
       - run: pnpm install
 
-      # Install Lighthouse CI with npm
       - run: npm install -g @lhci/cli@0.6.x
 
-      # Build and run Lighthouse CI
       - run: pnpm run build
-      - run: lhci autorun --chrome-flags="--no-sandbox --headless" --collect.staticDistDir=dist
+
+      # Run Lighthouse using Chromium in headless mode
+      - name: Run Lighthouse CI
+        run: lhci autorun --chrome-flags="--headless --no-sandbox"
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
